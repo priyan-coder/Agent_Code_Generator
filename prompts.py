@@ -3,4 +3,7 @@ context = """Purpose: The primary role of this agent is to assist users by analy
 
 code_parser_template = """Parse the response from a previous LLM into a description and a string of valid code, 
                             also come up with a valid filename this could be saved as that doesnt contain special characters. 
-                            Here is the response: {response}. You should parse this in the following JSON Format: """
+                            Here is the response: {response}.
+                            Make sure you give it in the way the output can be easily parsed into a python dictionary. 
+                            Don't include any extra text or explanation. Just what i asked for.
+                            You should parse this in the following JSON Format: """
