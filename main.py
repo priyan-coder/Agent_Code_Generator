@@ -4,12 +4,14 @@ from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, PromptTemp
 from llama_index.core.embeddings import resolve_embed_model
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import ReActAgent
+from code_reader import code_reader
 from prompts import context
 from dotenv import load_dotenv
 
 load_dotenv()   # load environment variables from .env file
 
-llm = Ollama(model="mistral", request_timeout=30.0)
+llm = Ollama(model="llama3.2", request_timeout=30.0)
+# llama parse is not designed to read code, but it can be used to read documentation 
 parser = LlamaParse(result_type="markdown") # takes the document, pushes it to the cloud, gets parsed, and returns
 
 file_extractor = {".pdf": parser} # whenever a pdf is found, it will be parsed
@@ -23,7 +25,7 @@ query_engine = vector_index.as_query_engine(llm=llm) # can now use the vector in
 tools = [
     QueryEngineTool(query_engine=query_engine, metadata=ToolMetadata(name="api_documentation", 
         description="this gives documentation about code for an API. Use this for reading docs for the API")),
-    
+    code_reader
 ]
 
 # a different LLM for code generation
