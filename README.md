@@ -53,3 +53,11 @@ pip install -r requirements.txt
 2. Ensure your `.env` has `LLAMA_CLOUD_API_KEY`.
 3. Run `python main.py`, enter prompts when prompted.
 4. Generated code appears in `output/` with the returned filename.
+
+## Prompt Suggestions
+
+Copy‑paste the prompt below into the running agent to generate a client script:
+
+```text
+Read the contents of data/test.py and write a Python script that calls the POST /items endpoint to create a new item.
+```
